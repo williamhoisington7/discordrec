@@ -88,6 +88,10 @@ jobs:
 
           & gh release view $tag *> $null
           if ($LASTEXITCODE -eq 0) {
+            # Delete the existing asset first to avoid HTTP 422 "already exists" errors
+            # that --clobber can encounter under race conditions.
+            $assetName = [System.IO.Path]::GetFileName($exe)
+            & gh release delete-asset $tag $assetName --yes *> $null
             Invoke-Gh -GhArgs @('release', 'upload', $tag, $exe, '--clobber')
             Invoke-Gh -GhArgs @('release', 'edit', $tag, '--title', $title, '--notes', $notes, '--latest')
           } else {
