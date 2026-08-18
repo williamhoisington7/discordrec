@@ -47,7 +47,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='WouldKillForPie-InvitationStudio',
+    name='Would Kill For Pie',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

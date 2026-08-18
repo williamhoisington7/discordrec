@@ -63,7 +63,7 @@ def main() -> None:
     server.start()
     _wait_for_server(host, port)
 
-    title = "Would Kill For Pie — Invitation Studio"
+    title = "Would Kill For Pie"
     try:
         import webview
     except ImportError:
