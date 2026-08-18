@@ -1,12 +1,23 @@
 from __future__ import annotations
 
 import os
+import sys
 from datetime import date
 from io import BytesIO
+from pathlib import Path
 
 from flask import Flask, render_template, request, send_file
 
-from discordrec.invitation import (
+
+def _resource_base() -> Path:
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        return Path(sys._MEIPASS)
+    return Path(__file__).resolve().parent
+
+
+_BASE = _resource_base()
+
+from discordrec.invitation import (  # noqa: E402
     DEFAULT_COMMUNITY_NAME,
     DEFAULT_MARKETING_URL,
     DEFAULT_SIGNER,
@@ -16,7 +27,11 @@ from discordrec.invitation import (
     sanitize_filename_part,
 )
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder=str(_BASE / "templates"),
+    static_folder=str(_BASE / "static"),
+)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "discordrec-invitation-dev-key")
 
 

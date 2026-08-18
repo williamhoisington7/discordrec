@@ -12,7 +12,7 @@
   --line: #5c4030;
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   --radius: 18px;
-  font-family: "Spectral", Georgia, "Times New Roman", serif;
+  font-family: Georgia, "Palatino Linotype", Palatino, "Times New Roman", serif;
 }
 
 * {
@@ -78,12 +78,12 @@ body {
   letter-spacing: 0.22em;
   font-size: 0.78rem;
   color: var(--gold);
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
 }
 
 .hero h1 {
   margin: 0 0 0.8rem;
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
   font-size: clamp(1.8rem, 4vw, 2.7rem);
   line-height: 1.15;
   color: var(--ink);
@@ -115,7 +115,7 @@ body {
 }
 
 .flow li {
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   color: var(--ink);
@@ -159,7 +159,7 @@ body {
 
 .panel h2 {
   margin: 0 0 1rem;
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
   font-size: 1.15rem;
   color: var(--gold);
   letter-spacing: 0.04em;
@@ -223,7 +223,7 @@ textarea {
   border: 1px solid transparent;
   border-radius: 999px;
   padding: 0.85rem 1.2rem;
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -286,7 +286,7 @@ textarea {
 .letter-brand {
   margin: 0;
   color: var(--gold);
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
   font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -310,7 +310,7 @@ textarea {
 
 .letter-salutation {
   color: var(--gold);
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
 }
 
 .letter-closing,
@@ -319,7 +319,7 @@ textarea {
 }
 
 .letter-signer {
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
   color: var(--gold);
   font-weight: 700;
   margin-bottom: 1.2rem;
@@ -355,7 +355,7 @@ textarea {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-family: "Cinzel", "Times New Roman", serif;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   color: var(--gold);

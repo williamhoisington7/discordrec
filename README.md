@@ -1,40 +1,50 @@
 # discordrec
 
-Tools for Discord community recruitment around [wouldkillforpie.com](https://wouldkillforpie.com):
+Offline **Would Kill For PiE** invitation studio and optional Discord helpers.
 
-1. **Invitation letter UI** — create a formal, personalized PDF for one person at a time.
-2. **Optional role-based DM bot** — message members who already have a Path of Exile 2 role.
+## Invitation Studio (standalone Windows 11 app)
 
-## Invitation letter UI
+Create one formal PDF invitation at a time:
 
-The UI uses a dark-fantasy Would Kill For PiE theme (deep charcoal, crimson, and gold) inspired by the community’s Path of Exile aesthetic.
+1. Enter a recipient name.
+2. Preview or download a dark-fantasy styled letter.
+3. The letter asks them to visit **wouldkillforpie.com** first.
+4. When they are ready, they join Discord using the link on that site.
 
-Each letter:
+No internet connection and no Discord bot are required to generate letters.
 
-- is personalized with the recipient’s name
-- asks them to visit **wouldkillforpie.com** first to understand the community
-- tells them to join Discord only by clicking the link on that site
-
-### Setup
+### Run from source
 
 ```bash
 pip install -r requirements.txt
+python desktop_app.py
 ```
 
-### Run
+Browser-only mode:
 
 ```bash
 python app.py
 ```
 
-Open `http://127.0.0.1:5000`, enter a recipient name, preview the letter, and download the PDF.
+Then open `http://127.0.0.1:5000`.
 
-Optional fields:
+### Build the Windows 11 executable
 
-- Community name
-- Recruitment site URL (defaults to `https://wouldkillforpie.com`)
-- Signer name
-- Personal note
+On Windows 11:
+
+```bat
+build_windows.bat
+```
+
+Output:
+
+```text
+dist\WouldKillForPiE-InvitationStudio.exe
+```
+
+Double-click the `.exe` to open the offline invitation studio.
+
+GitHub Actions also builds the Windows executable on push (`Build Windows Invitation Studio` workflow) and uploads `WouldKillForPiE-InvitationStudio.exe` as an artifact.
 
 ### Tests
 
@@ -44,18 +54,16 @@ python -m unittest discover -s tests -v
 
 ## Optional PoE2 DM bot
 
-1. Install dependencies with `pip install -r requirements.txt`.
-2. Set environment variables:
-   - `DISCORD_TOKEN` (required)
-   - `TARGET_GUILD_ID` (required)
-   - `INVITE_URL` (required)
-   - `EXTRA_LINK` (optional)
-   - `POE2_ROLE_NAMES` (optional, comma-separated, default: `path of exile 2,poe2`)
-   - `DRY_RUN` (optional, `true`/`false`)
-
 ```bash
+pip install -r requirements.txt
 python bot.py
 ```
 
-When the bot starts, it DMs non-bot users in `TARGET_GUILD_ID` whose roles match `POE2_ROLE_NAMES`.
-Use `DRY_RUN=true` to preview recipients without sending messages.
+Environment variables:
+
+- `DISCORD_TOKEN` (required)
+- `TARGET_GUILD_ID` (required)
+- `INVITE_URL` (required)
+- `EXTRA_LINK` (optional)
+- `POE2_ROLE_NAMES` (optional)
+- `DRY_RUN` (optional)
