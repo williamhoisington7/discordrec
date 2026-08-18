@@ -92,7 +92,19 @@ jobs:
             # that --clobber can encounter under race conditions.
             $assetName = [System.IO.Path]::GetFileName($exe)
             & gh release delete-asset $tag $assetName --yes *> $null
-            Invoke-Gh -GhArgs @('release', 'upload', $tag, $exe, '--clobber')
+            # Retry the upload to handle the brief propagation delay after deletion.
+            $uploaded = $false
+            for ($attempt = 1; $attempt -le 5; $attempt++) {
+              & gh release upload $tag $exe --clobber
+              if ($LASTEXITCODE -eq 0) { $uploaded = $true; break }
+              if ($attempt -lt 5) {
+                Write-Host "Upload attempt $attempt failed (exit $LASTEXITCODE); retrying in 10 s..."
+                Start-Sleep -Seconds 10
+              }
+            }
+            if (-not $uploaded) {
+              throw "gh release upload failed after 5 attempts"
+            }
             Invoke-Gh -GhArgs @('release', 'edit', $tag, '--title', $title, '--notes', $notes, '--latest')
           } else {
             Invoke-Gh -GhArgs @('release', 'create', $tag, $exe, '--title', $title, '--notes', $notes, '--latest')
