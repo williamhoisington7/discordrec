@@ -98,10 +98,21 @@ jobs:
             }
           }
 
+          # Canonical published asset for the permanent main download URL.
+          $canonicalAsset = 'WouldKillForPie.exe'
+          # Known legacy names (spaces, dots, old product titles) left by earlier publishes.
+          $legacyAssets = @(
+            'WouldKillForPie.exe',
+            'Would Kill For Pie.exe',
+            'Would.Kill.For.Pie.exe',
+            'WouldKillForPie-InvitationStudio.exe',
+            'WouldKillForPiE-InvitationStudio.exe'
+          )
+
           & gh release view $tag *> $null
           if ($LASTEXITCODE -eq 0) {
             # Remove current and legacy asset names so the permanent link stays unique.
-            foreach ($assetName in @('WouldKillForPie.exe', 'Would Kill For Pie.exe', 'WouldKillForPie-InvitationStudio.exe', 'WouldKillForPiE-InvitationStudio.exe')) {
+            foreach ($assetName in $legacyAssets) {
               & gh release delete-asset $tag $assetName --yes *> $null
             }
             # Retry the upload to handle the brief propagation delay after deletion.
@@ -121,3 +132,15 @@ jobs:
           } else {
             Invoke-Gh -GhArgs @('release', 'create', $tag, $exe, '--title', $title, '--notes', $notes, '--latest')
           }
+
+          # Fail the job if the permanent main download asset is missing after publish.
+          $assetsJson = & gh release view $tag --json assets
+          if ($LASTEXITCODE -ne 0) {
+            throw "gh release view --json assets failed with exit code $LASTEXITCODE"
+          }
+          $assets = ($assetsJson | ConvertFrom-Json).assets
+          $names = @($assets | ForEach-Object { $_.name })
+          if ($canonicalAsset -notin $names) {
+            throw "Published release is missing required asset: $canonicalAsset (found: $($names -join ', '))"
+          }
+          Write-Host "Published main download asset: $canonicalAsset"
