@@ -60,19 +60,23 @@ def main() -> None:
     title = "Would Kill For PiE — Invitation Studio"
     try:
         import webview
+    except ImportError:
+        webview = None
 
-        webview.create_window(
-            title,
-            url,
-            width=1180,
-            height=860,
-            min_size=(900, 700),
-            background_color="#140c0a",
-        )
-        webview.start()
-        return
-    except Exception:
-        pass
+    if webview is not None:
+        try:
+            webview.create_window(
+                title,
+                url,
+                width=1180,
+                height=860,
+                min_size=(900, 700),
+                background_color="#140c0a",
+            )
+            webview.start()
+            return
+        except Exception as error:
+            print(f"Desktop window unavailable ({error!r}); opening local browser instead.")
 
     webbrowser.open(url)
     print(title)

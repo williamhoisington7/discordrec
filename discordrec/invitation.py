@@ -273,8 +273,9 @@ def build_invitation_pdf(details: InvitationDetails, output: BinaryIO | None = N
 
     if hasattr(buffer, "getvalue"):
         return buffer.getvalue()
-    if hasattr(buffer, "seek"):
+    if hasattr(buffer, "seek") and hasattr(buffer, "read"):
         buffer.seek(0)
+        return buffer.read()
     return b""
 
 

@@ -32,7 +32,9 @@ app = Flask(
     template_folder=str(_BASE / "templates"),
     static_folder=str(_BASE / "static"),
 )
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "discordrec-invitation-dev-key")
+# No server-side sessions are used; secret key is only set when provided.
+if os.environ.get("FLASK_SECRET_KEY"):
+    app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 
 def _form_defaults() -> dict[str, str]:
