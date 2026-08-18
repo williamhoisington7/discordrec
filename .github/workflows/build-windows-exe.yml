@@ -36,8 +36,8 @@ jobs:
       - name: Upload executable artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WouldKillForPiE-InvitationStudio-windows
-          path: dist/WouldKillForPiE-InvitationStudio.exe
+          name: WouldKillForPie-InvitationStudio-windows
+          path: dist/WouldKillForPie-InvitationStudio.exe
       - name: Publish latest Windows executable release
         if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
@@ -47,10 +47,10 @@ jobs:
           body: |
             Standalone Windows 11 invitation studio build.
 
-            Download `WouldKillForPiE-InvitationStudio.exe`, then double-click to run offline.
+            Download `WouldKillForPie-InvitationStudio.exe`, then double-click to run offline.
 
             Permanent link:
-            https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPiE-InvitationStudio.exe
-          files: dist/WouldKillForPiE-InvitationStudio.exe
+            https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPie-InvitationStudio.exe
+          files: dist/WouldKillForPie-InvitationStudio.exe
           make_latest: true
           fail_on_unmatched_files: true

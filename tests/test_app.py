@@ -18,8 +18,8 @@ class InvitationAppTests(unittest.TestCase):
             data={
                 "recipient_name": "Test User",
                 "marketing_url": "https://wouldkillforpie.com",
-                "community_name": "Would Kill For PiE",
-                "signer_name": "The Would Kill For PiE Community",
+                "community_name": "Would Kill For Pie",
+                "signer_name": "The Would Kill For Pie Community",
                 "personal_note": "",
                 "action": "preview",
             },

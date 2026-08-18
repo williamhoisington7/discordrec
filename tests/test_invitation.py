@@ -46,7 +46,7 @@ class InvitationTests(unittest.TestCase):
         self.assertEqual(preview["salutation"], "Dear Taylor,")
         self.assertEqual(preview["date"], "August 18, 2026")
         self.assertEqual(preview["footer"], "wouldkillforpie.com")
-        self.assertEqual(preview["header"], "Would Kill For PiE")
+        self.assertEqual(preview["header"], "Would Kill For Pie")
 
     def test_sanitize_filename_part(self):
         self.assertEqual(sanitize_filename_part("Jamie Lee!"), "Jamie-Lee")
