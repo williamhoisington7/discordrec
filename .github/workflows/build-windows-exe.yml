@@ -38,8 +38,19 @@ jobs:
         with:
           name: WouldKillForPiE-InvitationStudio-windows
           path: dist/WouldKillForPiE-InvitationStudio.exe
-      - name: Attach executable on tag optional
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Publish latest Windows executable release
+        if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || 'latest' }}
+          name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || 'Latest Windows build' }}
+          body: |
+            Standalone Windows 11 invitation studio build.
+
+            Download `WouldKillForPiE-InvitationStudio.exe`, then double-click to run offline.
+
+            Permanent link:
+            https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPiE-InvitationStudio.exe
           files: dist/WouldKillForPiE-InvitationStudio.exe
+          make_latest: true
+          fail_on_unmatched_files: true
