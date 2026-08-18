@@ -44,7 +44,11 @@ dist\WouldKillForPiE-InvitationStudio.exe
 
 Double-click the `.exe` to open the offline invitation studio.
 
-GitHub Actions also builds the Windows executable on push (`Build Windows Invitation Studio` workflow) and uploads `WouldKillForPiE-InvitationStudio.exe` as an artifact.
+GitHub Actions also builds the Windows executable on push (`Build Windows Invitation Studio` workflow), uploads `WouldKillForPiE-InvitationStudio.exe` as an artifact, and publishes it on the [latest release](https://github.com/williamhoisington7/discordrec/releases/latest).
+
+Direct download (after the latest main build finishes):
+
+https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPiE-InvitationStudio.exe
 
 ### Tests
 
