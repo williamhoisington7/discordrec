@@ -39,11 +39,22 @@ jobs:
           python -m pip install -r requirements-build.txt
       - name: Build executable
         run: python -m PyInstaller --noconfirm --clean invitation_studio.spec
+      - name: Stage space-free download asset
+        shell: pwsh
+        run: |
+          $built = "dist/Would Kill For Pie.exe"
+          if (-not (Test-Path -LiteralPath $built)) {
+            throw "Missing build output: $built"
+          }
+          # Release asset uses a space-free name so the permanent download URL stays clean.
+          Copy-Item -LiteralPath $built -Destination "dist/WouldKillForPie.exe" -Force
       - name: Upload executable artifact
         uses: actions/upload-artifact@v4
         with:
           name: Would-Kill-For-Pie-windows
-          path: "dist/Would Kill For Pie.exe"
+          path: |
+            dist/Would Kill For Pie.exe
+            dist/WouldKillForPie.exe
       # softprops/action-gh-release cannot reliably replace an existing asset with the
       # same filename on the rolling "latest" release (already_exists / race errors).
       # Use gh with --clobber so main rebuilds always refresh the downloadable exe.
@@ -57,9 +68,9 @@ jobs:
           # Keep native gh exit codes inspectable instead of turning them into terminating errors.
           $PSNativeCommandUseErrorActionPreference = $false
 
-          $exe = "dist/Would Kill For Pie.exe"
+          $exe = "dist/WouldKillForPie.exe"
           if (-not (Test-Path -LiteralPath $exe)) {
-            throw "Missing build output: $exe"
+            throw "Missing staged download asset: $exe"
           }
 
           if ($env:GITHUB_REF -like 'refs/tags/*') {
@@ -73,10 +84,10 @@ jobs:
           $notes = @(
             'Standalone Windows 11 Would Kill For Pie build.',
             '',
-            'Download `Would Kill For Pie.exe`, then double-click to run offline.',
+            'Download `WouldKillForPie.exe`, then double-click to run offline.',
             '',
-            'Permanent link:',
-            'https://github.com/williamhoisington7/discordrec/releases/latest/download/Would%20Kill%20For%20Pie.exe'
+            'Permanent download link:',
+            'https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPie.exe'
           ) -join "`n"
 
           function Invoke-Gh {
@@ -89,10 +100,10 @@ jobs:
 
           & gh release view $tag *> $null
           if ($LASTEXITCODE -eq 0) {
-            # Delete the existing asset first to avoid HTTP 422 "already exists" errors
-            # that --clobber can encounter under race conditions.
-            $assetName = [System.IO.Path]::GetFileName($exe)
-            & gh release delete-asset $tag $assetName --yes *> $null
+            # Remove current and legacy asset names so the permanent link stays unique.
+            foreach ($assetName in @('WouldKillForPie.exe', 'Would Kill For Pie.exe', 'WouldKillForPie-InvitationStudio.exe', 'WouldKillForPiE-InvitationStudio.exe')) {
+              & gh release delete-asset $tag $assetName --yes *> $null
+            }
             # Retry the upload to handle the brief propagation delay after deletion.
             $uploaded = $false
             for ($attempt = 1; $attempt -le 5; $attempt++) {
