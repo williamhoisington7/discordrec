@@ -13,12 +13,11 @@ a = Analysis(
     datas=[
         (str(root / 'templates'), 'templates'),
         (str(root / 'static'), 'static'),
-        (str(root / 'discordrec'), 'discordrec'),
     ],
     hiddenimports=[
         'app',
-        'discordrec',
-        'discordrec.invitation',
+        'invitation',
+        'poe2_inviter',
         'reportlab',
         'reportlab.pdfbase',
         'reportlab.pdfbase.pdfmetrics',

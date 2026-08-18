@@ -7,8 +7,9 @@ on:
     paths:
       - "desktop_app.py"
       - "app.py"
+      - "invitation.py"
+      - "poe2_inviter.py"
       - "invitation_studio.spec"
-      - "discordrec/**"
       - "templates/**"
       - "static/**"
       - "requirements.txt"

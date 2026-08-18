@@ -1,6 +1,6 @@
 import unittest
 
-from discordrec.poe2_inviter import build_invite_message, is_poe2_player, normalize_names
+from poe2_inviter import build_invite_message, is_poe2_player, normalize_names
 
 
 class Poe2InviterTests(unittest.TestCase):

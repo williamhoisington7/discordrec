@@ -8,16 +8,7 @@ from pathlib import Path
 
 from flask import Flask, render_template, request, send_file
 
-
-def _resource_base() -> Path:
-    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-        return Path(sys._MEIPASS)
-    return Path(__file__).resolve().parent
-
-
-_BASE = _resource_base()
-
-from discordrec.invitation import (  # noqa: E402
+from invitation import (
     DEFAULT_COMMUNITY_NAME,
     DEFAULT_MARKETING_URL,
     DEFAULT_SIGNER,
@@ -26,6 +17,15 @@ from discordrec.invitation import (  # noqa: E402
     build_invitation_preview,
     sanitize_filename_part,
 )
+
+
+def _resource_base() -> Path:
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        return Path(sys._MEIPASS)
+    return Path(__file__).resolve().parent
+
+
+_BASE = _resource_base()
 
 app = Flask(
     __name__,

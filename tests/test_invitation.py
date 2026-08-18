@@ -2,7 +2,7 @@ import unittest
 from datetime import date
 from io import BytesIO
 
-from discordrec.invitation import (
+from invitation import (
     InvitationDetails,
     build_invitation_body,
     build_invitation_pdf,

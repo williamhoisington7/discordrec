@@ -6,7 +6,7 @@ import os
 
 import discord
 
-from discordrec.poe2_inviter import DEFAULT_POE2_ROLE_ALIASES, build_invite_message, is_poe2_player
+from poe2_inviter import DEFAULT_POE2_ROLE_ALIASES, build_invite_message, is_poe2_player
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger("poe2-invite-bot")
