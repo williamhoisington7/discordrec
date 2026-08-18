@@ -14,8 +14,8 @@ from reportlab.lib.units import inch
 from reportlab.platypus import HRFlowable, Paragraph, SimpleDocTemplate, Spacer
 
 DEFAULT_MARKETING_URL = "https://wouldkillforpie.com"
-DEFAULT_COMMUNITY_NAME = "Would Kill For PiE"
-DEFAULT_SIGNER = "The Would Kill For PiE Community"
+DEFAULT_COMMUNITY_NAME = "Would Kill For Pie"
+DEFAULT_SIGNER = "The Would Kill For Pie Community"
 
 # Theme aligned with dark-fantasy / PoE-inspired WKFP graphics.
 THEME_BG = HexColor("#140c0a")
