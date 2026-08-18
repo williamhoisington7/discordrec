@@ -18,6 +18,11 @@ class Poe2InviterTests(unittest.TestCase):
         self.assertIn("https://discord.gg/example", message)
         self.assertIn("https://example.com/builds", message)
 
+    def test_build_invite_message_without_optional_link(self):
+        message = build_invite_message("https://discord.gg/example")
+        self.assertIn("https://discord.gg/example", message)
+        self.assertNotIn("More info:", message)
+
 
 if __name__ == "__main__":
     unittest.main()

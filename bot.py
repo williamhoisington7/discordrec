@@ -36,11 +36,6 @@ class Poe2InviteBot(discord.Client):
             return
         self._did_broadcast = True
 
-        if not TOKEN or not GUILD_ID or not INVITE_URL:
-            LOGGER.error("Missing required env vars: DISCORD_TOKEN, TARGET_GUILD_ID, INVITE_URL")
-            await self.close()
-            return
-
         guild = self.get_guild(GUILD_ID)
         if guild is None:
             LOGGER.error("Could not find guild with id %s", GUILD_ID)
@@ -78,5 +73,9 @@ class Poe2InviteBot(discord.Client):
 if __name__ == "__main__":
     if not TOKEN:
         raise SystemExit("DISCORD_TOKEN is required")
+    if not GUILD_ID:
+        raise SystemExit("TARGET_GUILD_ID is required")
+    if not INVITE_URL:
+        raise SystemExit("INVITE_URL is required")
     bot = Poe2InviteBot()
     bot.run(TOKEN)
