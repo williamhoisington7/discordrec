@@ -39,6 +39,15 @@ def _wait_for_server(host: str, port: int, timeout: float = 10.0) -> None:
     raise RuntimeError(f"Local invitation server did not start on {host}:{port}")
 
 
+def configure_webview_downloads(webview_module) -> None:
+    """Enable attachment downloads so the PDF button works in the desktop shell.
+
+    pywebview cancels Content-Disposition downloads unless ALLOW_DOWNLOADS is true
+    (see edgechromium.on_download_starting and equivalents on other platforms).
+    """
+    webview_module.settings["ALLOW_DOWNLOADS"] = True
+
+
 def main() -> None:
     # Import after sys.path configuration so frozen builds resolve bundled modules.
     from app import app
@@ -65,6 +74,7 @@ def main() -> None:
 
     if webview is not None:
         try:
+            configure_webview_downloads(webview)
             webview.create_window(
                 title,
                 url,

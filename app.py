@@ -84,11 +84,14 @@ def create_invitation():
     if action == "download":
         pdf_bytes = build_invitation_pdf(details)
         filename = f"invitation-{sanitize_filename_part(details.recipient_name)}.pdf"
+        pdf_stream = BytesIO(pdf_bytes)
+        pdf_stream.seek(0)
         return send_file(
-            path_or_file=BytesIO(pdf_bytes),
+            path_or_file=pdf_stream,
             mimetype="application/pdf",
             as_attachment=True,
             download_name=filename,
+            max_age=0,
         )
 
     preview = build_invitation_preview(details)

@@ -39,6 +39,9 @@ class InvitationAppTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.data.startswith(b"%PDF"))
         self.assertIn("pdf", response.headers.get("Content-Type", ""))
+        content_disposition = response.headers.get("Content-Disposition", "")
+        self.assertIn("attachment", content_disposition)
+        self.assertIn("invitation-Test-User.pdf", content_disposition)
 
 
 if __name__ == "__main__":
