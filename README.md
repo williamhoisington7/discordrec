@@ -1,26 +1,69 @@
 # discordrec
 
-Automatically send a Discord invite + link to members who have a Path of Exile 2 role.
+Offline **Would Kill For PiE** invitation studio and optional Discord helpers.
 
-## Setup
+## Invitation Studio (standalone Windows 11 app)
 
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. Set environment variables:
-   - `DISCORD_TOKEN` (required)
-   - `TARGET_GUILD_ID` (required)
-   - `INVITE_URL` (required)
-   - `EXTRA_LINK` (optional)
-   - `POE2_ROLE_NAMES` (optional, comma-separated, default: `path of exile 2,poe2`)
-   - `DRY_RUN` (optional, `true`/`false`)
+Create one formal PDF invitation at a time:
 
-## Run
+1. Enter a recipient name.
+2. Preview or download a dark-fantasy styled letter.
+3. The letter asks them to visit **wouldkillforpie.com** first.
+4. When they are ready, they join Discord using the link on that site.
+
+No internet connection and no Discord bot are required to generate letters.
+
+### Run from source
 
 ```bash
+pip install -r requirements.txt
+python desktop_app.py
+```
+
+Browser-only mode:
+
+```bash
+python app.py
+```
+
+Then open `http://127.0.0.1:5000`.
+
+### Build the Windows 11 executable
+
+On Windows 11:
+
+```bat
+build_windows.bat
+```
+
+Output:
+
+```text
+dist\WouldKillForPiE-InvitationStudio.exe
+```
+
+Double-click the `.exe` to open the offline invitation studio.
+
+GitHub Actions also builds the Windows executable on push (`Build Windows Invitation Studio` workflow) and uploads `WouldKillForPiE-InvitationStudio.exe` as an artifact.
+
+### Tests
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+## Optional PoE2 DM bot
+
+```bash
+pip install -r requirements.txt
 python bot.py
 ```
 
-When the bot starts, it DMs all non-bot users in `TARGET_GUILD_ID` whose roles match `POE2_ROLE_NAMES`.
-Use `DRY_RUN=true` to preview recipients without sending messages.
+Environment variables:
+
+- `DISCORD_TOKEN` (required)
+- `TARGET_GUILD_ID` (required)
+- `INVITE_URL` (required)
+- `EXTRA_LINK` (optional)
+- `POE2_ROLE_NAMES` (optional)
+- `DRY_RUN` (optional)

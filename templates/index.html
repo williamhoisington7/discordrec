@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Would Kill For PiE | Personal Invitation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="smoke" aria-hidden="true"></div>
+  <div class="page">
+    <header class="hero">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="pie-icon">&#129383;</span>
+      </div>
+      <p class="eyebrow">Would Kill For PiE</p>
+      <h1>Formal Discord Recruitment Invitation</h1>
+      <p class="lede">
+        Create one polished invitation at a time. The letter asks your guest to visit
+        <strong>wouldkillforpie.com</strong> first to understand the community. When they
+        are ready to join Discord, they use the link on that site.
+      </p>
+      <ol class="flow">
+        <li>Choose someone to invite</li>
+        <li>Generate a formal letter</li>
+        <li>They review wouldkillforpie.com</li>
+        <li>They join Discord from the site link</li>
+      </ol>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="panel-frame">
+          <h2>Invitation details</h2>
+          {% if error %}
+          <div class="alert" role="alert">{{ error }}</div>
+          {% endif %}
+
+          <form method="post" action="{{ url_for('create_invitation') }}" class="form">
+            <label>
+              Recipient name
+              <input
+                type="text"
+                name="recipient_name"
+                value="{{ values.recipient_name }}"
+                maxlength="120"
+                required
+                placeholder="Alex Rivera"
+                autofocus
+              >
+            </label>
+
+            <label>
+              Community name
+              <input
+                type="text"
+                name="community_name"
+                value="{{ values.community_name }}"
+                maxlength="120"
+              >
+            </label>
+
+            <label>
+              Recruitment site URL
+              <input
+                type="url"
+                name="marketing_url"
+                value="{{ values.marketing_url }}"
+                maxlength="300"
+                placeholder="https://wouldkillforpie.com"
+              >
+              <span class="hint">Invitees review this page before joining Discord.</span>
+            </label>
+
+            <label>
+              Signer name
+              <input
+                type="text"
+                name="signer_name"
+                value="{{ values.signer_name }}"
+                maxlength="120"
+              >
+            </label>
+
+            <label>
+              Optional personal note
+              <textarea
+                name="personal_note"
+                rows="4"
+                maxlength="800"
+                placeholder="Add one short personal sentence if you want the letter to feel more tailored."
+              >{{ values.personal_note }}</textarea>
+            </label>
+
+            <div class="actions">
+              <button type="submit" name="action" value="preview" class="button secondary">
+                Preview letter
+              </button>
+              <button type="submit" name="action" value="download" class="button primary">
+                Download PDF
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel preview-panel">
+        <div class="panel-frame">
+          <h2>Letter preview</h2>
+          {% if preview %}
+          <article class="letter" aria-live="polite">
+            <div class="letter-ornament" aria-hidden="true"></div>
+            <div class="letter-header">
+              <p class="letter-brand">{{ preview.header }}</p>
+              <p class="letter-tagline">{{ preview.tagline }}</p>
+            </div>
+            <p class="letter-date">{{ preview.date }}</p>
+            <p class="letter-salutation">{{ preview.salutation }}</p>
+            {% for paragraph in preview.body.split('\n\n') %}
+            <p>{{ paragraph }}</p>
+            {% endfor %}
+            <p class="letter-closing">{{ preview.closing }}</p>
+            <p class="letter-signer">{{ preview.signer }}</p>
+            <p class="letter-footer">{{ preview.footer }}</p>
+          </article>
+          {% else %}
+          <div class="empty-preview">
+            <div class="seal" aria-hidden="true">WKFP</div>
+            <p>Enter a recipient name, then choose <strong>Preview letter</strong> or
+            <strong>Download PDF</strong>.</p>
+            <p>Each letter is created for one person and points them to
+            wouldkillforpie.com before they join Discord.</p>
+          </div>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
