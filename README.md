@@ -44,9 +44,9 @@ dist\Would Kill For Pie.exe
 
 Double-click the `.exe` to open the offline invitation studio.
 
-GitHub Actions also builds the Windows executable on push (`Build Windows Invitation Studio` workflow), uploads the branded local build as an artifact, and publishes a space-free release asset on the [latest release](https://github.com/williamhoisington7/discordrec/releases/latest).
+GitHub Actions also builds the Windows executable on push to `main` (`Build Windows Invitation Studio` workflow), uploads the branded local build as an artifact, and publishes the space-free release asset on the [latest release](https://github.com/williamhoisington7/discordrec/releases/latest).
 
-Direct download (after the latest main build finishes):
+Permanent download (always the newest successful main publish):
 
 https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPie.exe
 
