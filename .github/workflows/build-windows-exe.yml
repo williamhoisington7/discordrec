@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Would-Kill-For-Pie-windows
-          path: dist/Would Kill For Pie.exe
+          path: "dist/Would Kill For Pie.exe"
       # softprops/action-gh-release cannot reliably replace an existing asset with the
       # same filename on the rolling "latest" release (already_exists / race errors).
       # Use gh with --clobber so main rebuilds always refresh the downloadable exe.
