@@ -10,9 +10,9 @@ echo Building standalone Windows executable...
 python -m PyInstaller --noconfirm --clean invitation_studio.spec
 
 echo.
-if exist "dist\WouldKillForPie-InvitationStudio.exe" (
+if exist "dist\Would Kill For Pie.exe" (
   echo Build succeeded:
-  echo   dist\WouldKillForPie-InvitationStudio.exe
+  echo   dist\Would Kill For Pie.exe
 ) else (
   echo Build failed. Check the PyInstaller output above.
   exit /b 1

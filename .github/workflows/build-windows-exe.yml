@@ -7,8 +7,9 @@ on:
     paths:
       - "desktop_app.py"
       - "app.py"
+      - "invitation.py"
+      - "poe2_inviter.py"
       - "invitation_studio.spec"
-      - "discordrec/**"
       - "templates/**"
       - "static/**"
       - "requirements.txt"
@@ -41,8 +42,8 @@ jobs:
       - name: Upload executable artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WouldKillForPie-InvitationStudio-windows
-          path: dist/WouldKillForPie-InvitationStudio.exe
+          name: Would-Kill-For-Pie-windows
+          path: "dist/Would Kill For Pie.exe"
       # softprops/action-gh-release cannot reliably replace an existing asset with the
       # same filename on the rolling "latest" release (already_exists / race errors).
       # Use gh with --clobber so main rebuilds always refresh the downloadable exe.
@@ -56,7 +57,7 @@ jobs:
           # Keep native gh exit codes inspectable instead of turning them into terminating errors.
           $PSNativeCommandUseErrorActionPreference = $false
 
-          $exe = "dist/WouldKillForPie-InvitationStudio.exe"
+          $exe = "dist/Would Kill For Pie.exe"
           if (-not (Test-Path -LiteralPath $exe)) {
             throw "Missing build output: $exe"
           }
@@ -70,12 +71,12 @@ jobs:
           }
 
           $notes = @(
-            'Standalone Windows 11 invitation studio build.',
+            'Standalone Windows 11 Would Kill For Pie build.',
             '',
-            'Download `WouldKillForPie-InvitationStudio.exe`, then double-click to run offline.',
+            'Download `Would Kill For Pie.exe`, then double-click to run offline.',
             '',
             'Permanent link:',
-            'https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPie-InvitationStudio.exe'
+            'https://github.com/williamhoisington7/discordrec/releases/latest/download/Would%20Kill%20For%20Pie.exe'
           ) -join "`n"
 
           function Invoke-Gh {

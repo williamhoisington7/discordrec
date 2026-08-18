@@ -39,16 +39,16 @@ build_windows.bat
 Output:
 
 ```text
-dist\WouldKillForPie-InvitationStudio.exe
+dist\Would Kill For Pie.exe
 ```
 
 Double-click the `.exe` to open the offline invitation studio.
 
-GitHub Actions also builds the Windows executable on push (`Build Windows Invitation Studio` workflow), uploads `WouldKillForPie-InvitationStudio.exe` as an artifact, and publishes it on the [latest release](https://github.com/williamhoisington7/discordrec/releases/latest).
+GitHub Actions also builds the Windows executable on push (`Build Windows Invitation Studio` workflow), uploads `Would Kill For Pie.exe` as an artifact, and publishes it on the [latest release](https://github.com/williamhoisington7/discordrec/releases/latest).
 
 Direct download (after the latest main build finishes):
 
-https://github.com/williamhoisington7/discordrec/releases/latest/download/WouldKillForPie-InvitationStudio.exe
+https://github.com/williamhoisington7/discordrec/releases/latest/download/Would%20Kill%20For%20Pie.exe
 
 ### Tests
 
