@@ -65,6 +65,9 @@ def main() -> None:
 
     if webview is not None:
         try:
+            # pywebview disables Content-Disposition attachments unless this is on.
+            # Without it, the invitation form's "Download PDF" button appears to do nothing.
+            webview.settings["ALLOW_DOWNLOADS"] = True
             webview.create_window(
                 title,
                 url,
